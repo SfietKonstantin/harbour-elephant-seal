@@ -1,3 +1,6 @@
-add_subdirectory(lib)
-add_subdirectory(shim)
+option(USE_SHIM BOOLEAN CACHE)
 
+add_subdirectory(lib)
+if(${USE_SHIM})
+    add_subdirectory(shim)
+endif()
