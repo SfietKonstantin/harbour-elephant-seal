@@ -1,6 +1,9 @@
 project(harbour-elephant-seal)
 cmake_minimum_required(VERSION 3.5)
 
+add_subdirectory(cmake/corrosion)
+add_subdirectory(lib)
+
 # Allows developing in standard Linux without SFOS SDK
 include(FindPkgConfig)
 pkg_search_module(SAILFISH sailfishapp)
@@ -10,7 +13,6 @@ if ("${SAILFISH_FOUND}")
 message("Building for Sailfish OS")
 
 add_subdirectory(bin)
-add_subdirectory(lib)
 
 add_custom_target(distfiles
     SOURCES
@@ -37,9 +39,5 @@ ${CMAKE_BINARY_DIR}/harbour-elephant-seal:bin
 ")
 
 else()
-
 message("Building without Sailfish OS support")
-
-add_subdirectory(lib)
-
 endif()
