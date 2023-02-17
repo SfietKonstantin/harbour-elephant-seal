@@ -21,6 +21,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt5::Quick
     ${SAILFISH_LDFLAGS}
     elephant-seal-lib
+    elephant-seal-rs-cxx
 )
 
 install(TARGETS ${PROJECT_NAME}
@@ -51,14 +52,18 @@ install(FILES icons/172x172/harbour-elephant-seal.png
 
 # Get the other files reachable from the project tree in Qt Creator
 FILE(GLOB TsFiles "translations/*.ts")
-add_custom_target(otherfiles
-    SOURCES
-        harbour-elephant-seal.desktop
-        qml/harbour-elephant-seal.qml
-        qml/cover/CoverPage.qml
-        qml/pages/FirstPage.qml
-        qml/pages/SecondPage.qml
-        ${TsFiles})
+add_custom_target(otherfiles SOURCES
+    harbour-elephant-seal.desktop
+
+    qml/harbour-elephant-seal.qml
+    qml/cover/CoverPage.qml
+    qml/pages/FirstPage.qml
+    qml/pages/SecondPage.qml
+    qml/pages/LoginPage.qml
+    qml/pages/LoginCodePage.qml
+
+    ${TsFiles}
+)
 
 # Tell Qt Creator where the application executable(s) would be located on the
 # device.

@@ -6,9 +6,16 @@ find_package (Qt5 COMPONENTS Core)
 set(CMAKE_AUTOMOC ON)
 
 add_library(${PROJECT_NAME} STATIC
-    lib/hooks.h
-    lib/lib.h
-    lib/lib.cpp
+    lib/asyncbus.h
+    lib/asyncbus.cpp
+    lib/asyncevent.h
+    lib/asyncevent.cpp
+    lib/mastodon.h
+    lib/mastodon.cpp
+    lib/mastodonhook.h
+    lib/mastodonhook.cpp
+    lib/mastodonlogin.h
+    lib/mastodonlogin.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC .)

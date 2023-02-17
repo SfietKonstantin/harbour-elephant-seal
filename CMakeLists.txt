@@ -1,6 +1,14 @@
 project(harbour-elephant-seal)
 cmake_minimum_required(VERSION 3.5)
 
+# Allows developing in standard Linux without SFOS SDK
+include(FindPkgConfig)
+pkg_search_module(SAILFISH sailfishapp)
+
+if ("${SAILFISH_FOUND}")
+
+message("Building for Sailfish OS")
+
 add_subdirectory(bin)
 add_subdirectory(lib)
 
@@ -28,3 +36,10 @@ file(WRITE "${CMAKE_BINARY_DIR}/QtCreatorDeployment.txt"
 ${CMAKE_BINARY_DIR}/harbour-elephant-seal:bin
 ")
 
+else()
+
+message("Building without Sailfish OS support")
+
+add_subdirectory(lib)
+
+endif()
