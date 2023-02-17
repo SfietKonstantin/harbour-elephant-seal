@@ -8,8 +8,6 @@ set(CMAKE_AUTOMOC ON)
 add_library(${PROJECT_NAME} STATIC
     lib/asyncbus.h
     lib/asyncbus.cpp
-    lib/asyncevent.h
-    lib/asyncevent.cpp
     lib/mastodon.h
     lib/mastodon.cpp
     lib/mastodonhook.h
