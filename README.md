@@ -1,1 +1,1 @@
-# harbour-elephant-seal
+# Elephant seal, a Mastodon client
