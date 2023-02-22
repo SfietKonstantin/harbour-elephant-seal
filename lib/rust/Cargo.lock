@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "elephant-seal"
+name = "elephant-seal-rs"
 version = "0.1.0"

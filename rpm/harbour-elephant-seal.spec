@@ -13,7 +13,7 @@ Version:    0.1
 Release:    1
 Group:      Applications/Internet
 License:    GPLv3
-URL:        http://example.org/
+URL:        https://github.com/SfietKonstantin/harbour-elephant-seal
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-elephant-seal.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
@@ -21,10 +21,10 @@ BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  cmake
 BuildRequires:  rust
 BuildRequires:  rust-std-static
 BuildRequires:  desktop-file-utils
-BuildRequires:  cmake
 
 %description
 A simple Mastodon client
@@ -38,10 +38,27 @@ A simple Mastodon client
 
 %build
 # >> build pre
+%ifarch %arm32
+%define SB2_TARGET armv7-unknown-linux-gnueabihf
+%endif
+%ifarch %arm64
+%define SB2_TARGET aarch64-unknown-linux-gnu
+%endif
+%ifarch %ix86
+%define SB2_TARGET i686-unknown-linux-gnu
+%endif
+
+%ifnarch %ix86
+export CARGO_TARGET_I686_UNKNOWN_LINUX_GNU_LINKER=host-gcc
+%endif
+
+export CARGO_BUILD_TARGET=%SB2_TARGET
+
+%cmake -DRust_CARGO_TARGET=%SB2_TARGET .
+make %{?_smp_mflags}
 # << build pre
 
-%cmake . 
-make %{?_smp_mflags}
+
 
 # >> build post
 # << build post
@@ -49,8 +66,8 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 # >> install pre
-# << install pre
 %make_install
+# << install pre
 
 # >> install post
 # << install post
