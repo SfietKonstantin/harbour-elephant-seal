@@ -1,9 +1,6 @@
 name: Github CI build
 
 on:
-  push:
-    tags:
-      - '*'
   pull_request:
     branches:
       - main
@@ -11,39 +8,41 @@ env:
   RELEASE: 4.5.0.16
 
 jobs:
-  build:
+  build-sfos:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Prepare
-      run: mkdir output
-      
-    - name: Build armv7hl
-      id: build_armv7hl
-      uses: coderus/github-sfos-build@master
       with:
-        release: ${{ env.RELEASE }}
-        arch: armv7hl
+        submodules: recursive
 
-    - name: Build aarch64
-      id: build_aarch64
-      uses: coderus/github-sfos-build@master
-      with:
-        release: ${{ env.RELEASE }}
-        arch: aarch64
-
-    - name: Build i486
-      id: build_i486
+    - name: Build
       uses: coderus/github-sfos-build@master
       with:
         release: ${{ env.RELEASE }}
         arch: i486
-      
-    - name: Upload build result
-      uses: actions/upload-artifact@v2
-      with:
-        name: output-rpms
-        path: RPMS
 
+  build-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: 5.15.2
+        host: linux
+        target: desktop
+        arch: gcc_64
+        dir: ${{ runner.temp }}
+        setup-python: false
+        aqtversion: ==3.1.*
+        py7zrversion: ==0.20.*
+
+    - name: Build
+      run:  |
+        cmake . -DCMAKE_BUILD_TYPE=Debug -DUSE_SHIM=ON
+        make
