@@ -17,14 +17,17 @@ PkgConfigBR:
   - Qt5Core
   - Qt5Qml
   - Qt5Quick
+  - openssl
 
 PkgBR:
   - cmake
   - rust
   - rust-std-static
+  - qt5-qmake
 
 Requires:
   - sailfishsilica-qt5 >= 0.10.9
+  - openssl-libs
 
 Files:
   - '%{_bindir}'

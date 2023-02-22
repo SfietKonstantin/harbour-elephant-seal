@@ -16,7 +16,7 @@ public:
     explicit Mastodon(QObject *parent = nullptr);
     bool isLoggedIn() const;
 
-    EventBus *eventBus() const;
+    EventBus &eventBus() const;
     void prepareLogin(const QString &server);
 signals:
     void loggedInChanged();

@@ -15,15 +15,15 @@ Mastodon *MastodonLogin::mastodon() const {
 void MastodonLogin::setMastodon(Mastodon *mastodon) {
     if (m_mastodon != mastodon) {
         if (m_mastodon != nullptr) {
-            auto *bus = m_mastodon->eventBus();
-            disconnect(bus, nullptr, this, nullptr);
+            auto &bus = m_mastodon->eventBus();
+            disconnect(&bus, nullptr, this, nullptr);
         }
 
         m_mastodon = mastodon;
 
         if (mastodon != nullptr) {
-            auto *bus = mastodon->eventBus();
-            connect(bus, &EventBus::displayCodeInput, this, &MastodonLogin::displayCodeInput);
+            auto &bus = mastodon->eventBus();
+            connect(&bus, &EventBus::displayCodeInput, this, &MastodonLogin::displayCodeInput);
         }
         emit mastodonChanged();
     }
