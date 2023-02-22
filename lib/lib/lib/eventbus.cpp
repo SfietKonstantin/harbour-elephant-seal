@@ -5,6 +5,6 @@ EventBus::EventBus(QObject *parent)
 {
 }
 
-void EventBus::sendDisplayCodeInput(EventBus *bus) {
-    emit bus->displayCodeInput();
+void EventBus::sendDisplayCodeInput(EventBus &bus) {
+    emit bus.displayCodeInput();
 }

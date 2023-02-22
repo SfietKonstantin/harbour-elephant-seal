@@ -17,13 +17,16 @@ URL:        https://github.com/SfietKonstantin/harbour-elephant-seal
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-elephant-seal.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   openssl-libs
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(openssl)
 BuildRequires:  cmake
 BuildRequires:  rust
 BuildRequires:  rust-std-static
+BuildRequires:  qt5-qmake
 BuildRequires:  desktop-file-utils
 
 %description
@@ -51,6 +54,27 @@ A simple Mastodon client
 %ifnarch %ix86
 export CARGO_TARGET_I686_UNKNOWN_LINUX_GNU_LINKER=host-gcc
 %endif
+
+# This avoids a malloc hang in sb2 gated calls to execvp/dup2/chdir
+# during fork/exec. It has no effect outside sb2 so doesn't hurt
+# native builds.
+export SB2_RUST_EXECVP_SHIM="/usr/bin/env LD_PRELOAD=/usr/lib/libsb2/libsb2.so.1 /usr/bin/env"
+export SB2_RUST_USE_REAL_EXECVP=Yes
+export SB2_RUST_USE_REAL_FN=Yes
+export SB2_RUST_NO_SPAWNVP=Yes
+
+# Set compiler for build scripts
+%ifnarch %ix86
+export CARGO_TARGET_I686_UNKNOWN_LINUX_GNU_LINKER=host-gcc
+%endif
+
+# Set meego cross compilers
+export CC_armv7_unknown_linux_gnueabihf=armv7hl-meego-linux-gnueabi-gcc
+export CXX_armv7_unknown_linux_gnueabihf=armv7hl-meego-linux-gnueabi-g++
+export AR_armv7_unknown_linux_gnueabihf=armv7hl-meego-linux-gnueabi-ar
+export CC_aarch64_unknown_linux_gnu=aarch64-meego-linux-gnu-gcc
+export CXX_aarch64_unknown_linux_gnu=aarch64-meego-linux-gnu-g++
+export AR_aarch64_unknown_linux_gnu=aarch64-meego-linux-gnu-ar
 
 export CARGO_BUILD_TARGET=%SB2_TARGET
 

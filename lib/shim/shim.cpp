@@ -10,9 +10,9 @@ public:
         return false;
     }
 
-    void prepareLogin(const QString &serverUrl, EventBus *bus, EventBus::SendDisplayCodeInputCb cb) override {
+    void prepareLogin(const QString &serverUrl, EventBus &bus) override {
         Q_UNUSED(serverUrl)
-        cb(bus);
+        EventBus::sendDisplayCodeInput(bus);
     }
 };
 

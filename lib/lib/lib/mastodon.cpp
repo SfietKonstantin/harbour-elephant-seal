@@ -13,12 +13,12 @@ bool Mastodon::isLoggedIn() const {
     return m_loggedIn;
 }
 
-EventBus *Mastodon::eventBus() const {
-    return m_eventBus;
+EventBus &Mastodon::eventBus() const {
+    return *m_eventBus;
 }
 
 void Mastodon::prepareLogin(const QString &server) {
-    m_hook->prepareLogin(server, m_eventBus, &EventBus::sendDisplayCodeInput);
+    m_hook->prepareLogin(server, *m_eventBus);
 }
 
 void Mastodon::setLoggedIn(bool loggedIn) {
