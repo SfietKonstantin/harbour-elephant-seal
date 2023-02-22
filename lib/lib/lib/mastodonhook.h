@@ -1,6 +1,6 @@
 #pragma once
 
-#include "asyncbus.h"
+#include "eventbus.h"
 
 #include <QString>
 
@@ -9,7 +9,7 @@ class MastodonHook {
 public:
     virtual ~MastodonHook();
     virtual bool isLoggedIn() const = 0;
-    virtual void prepareLogin(const QString &serverUrl, AsyncBus *bus, AsyncBus::SendDisplayCodeInputCb cb) = 0;
+    virtual void prepareLogin(const QString &serverUrl, EventBus *bus, EventBus::SendDisplayCodeInputCb cb) = 0;
 
 protected:
     explicit MastodonHook();

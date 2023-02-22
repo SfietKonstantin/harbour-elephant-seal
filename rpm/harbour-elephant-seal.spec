@@ -11,7 +11,7 @@ Name:       harbour-elephant-seal
 Summary:    Mastodon client
 Version:    0.1
 Release:    1
-Group:      Qt/Qt
+Group:      Applications/Internet
 License:    GPLv3
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
@@ -21,6 +21,8 @@ BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  rust
+BuildRequires:  rust-std-static
 BuildRequires:  desktop-file-utils
 BuildRequires:  cmake
 

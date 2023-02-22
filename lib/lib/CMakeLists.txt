@@ -6,8 +6,8 @@ find_package (Qt5 COMPONENTS Core)
 set(CMAKE_AUTOMOC ON)
 
 add_library(${PROJECT_NAME} STATIC
-    lib/asyncbus.h
-    lib/asyncbus.cpp
+    lib/eventbus.h
+    lib/eventbus.cpp
     lib/mastodon.h
     lib/mastodon.cpp
     lib/mastodonhook.h

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "asyncbus.h"
+#include "eventbus.h"
 #include "mastodonhook.h"
 
 #include <QObject>
@@ -16,7 +16,7 @@ public:
     explicit Mastodon(QObject *parent = nullptr);
     bool isLoggedIn() const;
 
-    AsyncBus *asyncBus() const;
+    EventBus *eventBus() const;
     void prepareLogin(const QString &server);
 signals:
     void loggedInChanged();
@@ -26,6 +26,6 @@ private:
     void setLoggedIn(bool loggedIn);
 
     std::unique_ptr<MastodonHook> m_hook;
-    AsyncBus *m_asyncBus{nullptr};
+    EventBus *m_eventBus{nullptr};
     bool m_loggedIn{false};
 };
