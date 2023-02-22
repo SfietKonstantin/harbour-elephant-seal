@@ -3,14 +3,14 @@ Summary: Mastodon client
 Version: 0.1
 Release: 1
 Group: Applications/Internet
-URL: http://example.org/
+URL: https://github.com/SfietKonstantin/harbour-elephant-seal
 License: GPLv3
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
   A simple Mastodon client
-Builder: cmake
-
+Configure: none
+Builder: none
 
 PkgConfigBR:
   - sailfishapp >= 1.0.2
@@ -19,11 +19,12 @@ PkgConfigBR:
   - Qt5Quick
 
 PkgBR:
+  - cmake
   - rust
   - rust-std-static
 
 Requires:
-  - sailfishsilica-qt5 >= 0.10.9 
+  - sailfishsilica-qt5 >= 0.10.9
 
 Files:
   - '%{_bindir}'
