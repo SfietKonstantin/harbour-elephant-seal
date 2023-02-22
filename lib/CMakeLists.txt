@@ -1,6 +1,8 @@
 option(USE_SHIM BOOLEAN CACHE)
 
 add_subdirectory(lib)
-if(${USE_SHIM})
-    add_subdirectory(shim)
+add_subdirectory(shim)
+
+if (NOT ${USE_SHIM})
+    add_subdirectory(rust)
 endif()

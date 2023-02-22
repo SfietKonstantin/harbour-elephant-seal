@@ -5,8 +5,8 @@
 class Mastodon;
 class MastodonLogin : public QObject {
     Q_OBJECT
-    Q_PROPERTY(Mastodon *mastodon READ mastodon WRITE setMastodon NOTIFY mastodonChanged);
-    Q_PROPERTY(QString server READ server WRITE setServer NOTIFY serverChanged);
+    Q_PROPERTY(Mastodon *mastodon READ mastodon WRITE setMastodon NOTIFY mastodonChanged)
+    Q_PROPERTY(QString server READ server WRITE setServer NOTIFY serverChanged)
 
 public:
     explicit MastodonLogin(QObject *parent = nullptr);

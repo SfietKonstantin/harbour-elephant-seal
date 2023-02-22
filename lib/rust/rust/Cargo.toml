@@ -1,0 +1,9 @@
+[package]
+name = "elephant-seal"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+
+[lib]
+crate-type=["staticlib"]

@@ -2,7 +2,7 @@
 
 namespace {
 
-class ShimMastodonPrivate : public MastodonHook {
+class RustGlueMastodonPrivate : public MastodonHook {
 public:
     // MastodonHook interface
 public:
@@ -19,5 +19,5 @@ public:
 } // namespace
 
 std::unique_ptr<MastodonHook> Mastodon::makeHook() {
-    return std::make_unique<ShimMastodonPrivate>();
+    return std::make_unique<RustGlueMastodonPrivate>();
 }

@@ -4,25 +4,31 @@ cmake_minimum_required(VERSION 3.5)
 find_package (Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
 
 include(FindPkgConfig)
-pkg_search_module(SAILFISH sailfishapp REQUIRED)
+pkg_search_module(SAILFISH sailfishapp)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_compile_definitions(${PROJECT_NAME} PRIVATE
-    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-)
-target_include_directories(${PROJECT_NAME} PRIVATE
-    $<BUILD_INTERFACE:
-    ${SAILFISH_INCLUDE_DIRS}
->)
-target_link_libraries(${PROJECT_NAME}
-    Qt5::Quick
-    ${SAILFISH_LDFLAGS}
-    elephant-seal-lib
-    elephant-seal-rs-cxx
-)
+
+target_link_libraries(${PROJECT_NAME} Qt5::Quick elephant-seal-lib)
+
+if ("${SAILFISH_FOUND}")
+    message("Building for Sailfish OS")
+    add_compile_definitions(${PROJECT_NAME} WITH_SAILFISH)
+    target_link_libraries(${PROJECT_NAME} ${SAILFISH_LDFLAGS})
+else()
+    message("Building without Sailfish OS, for fast prototyping on desktop")
+endif()
+
+if (${USE_SHIM})
+    target_link_libraries(${PROJECT_NAME} elephant-seal-shim)
+else()
+    target_link_libraries(${PROJECT_NAME} elephant-seal-rs-cxx)
+endif()
+
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${SAILFISH_INCLUDE_DIRS})
 
 install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION bin
@@ -80,4 +86,5 @@ file(WRITE "${CMAKE_BINARY_DIR}/QtCreatorDeployment.txt"
     "${CMAKE_INSTALL_PREFIX}
 ${CMAKE_BINARY_DIR}/harbour-elephant-seal:bin
 ")
+
 

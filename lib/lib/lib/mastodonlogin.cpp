@@ -1,6 +1,6 @@
 #include "mastodonlogin.h"
 
-#include "asyncbus.h"
+#include "eventbus.h"
 #include "mastodon.h"
 
 MastodonLogin::MastodonLogin(QObject *parent)
@@ -15,15 +15,15 @@ Mastodon *MastodonLogin::mastodon() const {
 void MastodonLogin::setMastodon(Mastodon *mastodon) {
     if (m_mastodon != mastodon) {
         if (m_mastodon != nullptr) {
-            auto *bus = m_mastodon->asyncBus();
+            auto *bus = m_mastodon->eventBus();
             disconnect(bus, nullptr, this, nullptr);
         }
 
         m_mastodon = mastodon;
 
         if (mastodon != nullptr) {
-            auto *bus = mastodon->asyncBus();
-            connect(bus, &AsyncBus::displayCodeInput, this, &MastodonLogin::displayCodeInput, Qt::QueuedConnection);
+            auto *bus = mastodon->eventBus();
+            connect(bus, &EventBus::displayCodeInput, this, &MastodonLogin::displayCodeInput);
         }
         emit mastodonChanged();
     }
