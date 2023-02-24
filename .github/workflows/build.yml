@@ -30,6 +30,38 @@ jobs:
       with:
         submodules: recursive
 
+    - uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: "1.52.1"
+        default: true
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: 5.15.2
+        host: linux
+        target: desktop
+        arch: gcc_64
+        dir: ${{ runner.temp }}
+        setup-python: false
+        aqtversion: ==3.1.*
+        py7zrversion: ==0.20.*
+
+    - name: Build
+      run:  |
+        cmake . -DCMAKE_BUILD_TYPE=Debug
+        make
+
+
+  build-dev-shim:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
