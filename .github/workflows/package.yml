@@ -31,5 +31,11 @@ jobs:
     - name: Upload build result
       uses: actions/upload-artifact@v2
       with:
-        name: output-rpms
+        name: rpms
         path: RPMS
+
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        draft: true
+        artifacts: "RPMS/*.rpm"
