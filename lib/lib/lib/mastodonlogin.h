@@ -22,7 +22,7 @@ signals:
     void mastodonChanged();
     void serverChanged();
 
-    void displayCodeInput();
+    void openCodeUrl(const QString &url);
 
 private:
     Mastodon *m_mastodon{nullptr};

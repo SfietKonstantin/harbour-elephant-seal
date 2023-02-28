@@ -5,6 +5,6 @@ EventBus::EventBus(QObject *parent)
 {
 }
 
-void EventBus::sendDisplayCodeInput(EventBus &bus) {
-    emit bus.displayCodeInput();
+void EventBus::sendOpenCodeUrl(EventBus &bus, const QString &url) {
+    emit bus.openCodeUrl(url);
 }

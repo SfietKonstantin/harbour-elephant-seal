@@ -23,7 +23,7 @@ void MastodonLogin::setMastodon(Mastodon *mastodon) {
 
         if (mastodon != nullptr) {
             auto &bus = mastodon->eventBus();
-            connect(&bus, &EventBus::displayCodeInput, this, &MastodonLogin::displayCodeInput);
+            connect(&bus, &EventBus::openCodeUrl, this, &MastodonLogin::openCodeUrl);
         }
         emit mastodonChanged();
     }

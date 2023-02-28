@@ -12,7 +12,7 @@ public:
 
     void prepareLogin(const QString &serverUrl, EventBus &bus) override {
         Q_UNUSED(serverUrl)
-        EventBus::sendDisplayCodeInput(bus);
+        EventBus::sendOpenCodeUrl(bus, serverUrl);
     }
 };
 

@@ -4,3 +4,8 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-elephant-seal
 Exec=harbour-elephant-seal
 Name=Elephant seal
+
+[X-Sailjail]
+Permissions=Internet;Camera;Pictures
+OrganizationName=com.github.SfietKonstantin
+ApplicationName=harbour-elephant-seal

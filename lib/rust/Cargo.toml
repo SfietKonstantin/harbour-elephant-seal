@@ -11,7 +11,6 @@ cxx = "1.0"
 cxx-qt-lib = { git = "https://github.com/SfietKonstantin/cxx-qt", branch = "sfos" }
 env_logger = "0.9"
 log = "0.4"
-open = "3.2"
 pretend = "0.4.0"
 pretend-reqwest = "0.4.0"
 tokio = { version = "1", features = ["rt-multi-thread"] }

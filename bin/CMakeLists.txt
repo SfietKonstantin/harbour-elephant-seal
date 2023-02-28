@@ -17,6 +17,7 @@ if ("${SAILFISH_FOUND}")
     message("Building for Sailfish OS")
     add_compile_definitions(${PROJECT_NAME} WITH_SAILFISH)
     target_link_libraries(${PROJECT_NAME} ${SAILFISH_LDFLAGS})
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SAILFISH_INCLUDE_DIRS})
 else()
     message("Building without Sailfish OS, for fast prototyping on desktop")
 endif()
@@ -26,9 +27,6 @@ if (${USE_SHIM})
 else()
     target_link_libraries(${PROJECT_NAME} elephant-seal-rs-cxx)
 endif()
-
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${SAILFISH_INCLUDE_DIRS})
 
 install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION bin

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 include(FindPkgConfig)
 
-find_package(Qt5 COMPONENTS Core REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 find_package(OpenSSL REQUIRED)
 pkg_search_module(SAILFISH sailfishapp)
 
@@ -43,4 +43,4 @@ add_library(${PROJECT_NAME} STATIC
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_link_libraries(${PROJECT_NAME} elephant-seal-lib elephant-seal-rs ${OPENSSL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} elephant-seal-lib elephant-seal-rs Qt5::Gui ${OPENSSL_LIBRARIES})
