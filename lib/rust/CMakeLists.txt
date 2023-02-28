@@ -14,7 +14,7 @@ if ("${SAILFISH_FOUND}")
     # And qmake detection is unsupported with old Qt
     corrosion_set_env_vars(elephant-seal-rs
         "CMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}"
-        "QMAKE=${QMAKE}"
+        "QMAKE=qmake"
         "OPENSSL_DIR=/usr"
         "OPENSSL_LIB_DIR=/usr/lib"
         "OPENSSL_INCLUDE_DIR=/usr/include"
