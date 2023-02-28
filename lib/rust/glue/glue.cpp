@@ -3,8 +3,8 @@
 #include <cxx-qt-lib/qstring.h>
 #include <elephant-seal-rs/src/ffi.rs.h>
 
-void event_bus_send_display_code_input(EventBus &bus) {
-    EventBus::sendDisplayCodeInput(bus);
+void event_bus_send_open_code_url(EventBus &bus, const QString &url) {
+    EventBus::sendOpenCodeUrl(bus, url);
 }
 
 namespace {

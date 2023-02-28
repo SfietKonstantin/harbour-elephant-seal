@@ -6,7 +6,7 @@ class EventBus : public QObject {
     Q_OBJECT
 public:
     explicit EventBus(QObject *parent = nullptr);
-    static void sendDisplayCodeInput(EventBus &bus);
+    static void sendOpenCodeUrl(EventBus &bus, const QString &url);
 signals:
-    void displayCodeInput();
+    void openCodeUrl(const QString &url);
 };

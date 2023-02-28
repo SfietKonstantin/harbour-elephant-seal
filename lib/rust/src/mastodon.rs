@@ -1,6 +1,5 @@
 mod login;
 
-use cxx_qt_lib::QString;
 use pretend::interceptor::NoopRequestInterceptor;
 use pretend::resolver::UrlResolver;
 use pretend::Pretend;
@@ -22,7 +21,6 @@ impl Mastodon {
     }
 
     pub fn init() {
-        // Force linking against cxx_qt_lib
-        QString::default();
+        env_logger::init();
     }
 }

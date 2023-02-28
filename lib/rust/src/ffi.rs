@@ -1,4 +1,5 @@
 use crate::Mastodon;
+use cxx_qt_lib::QString;
 use log::error;
 use std::pin::Pin;
 use std::sync::Arc;
@@ -7,7 +8,6 @@ use tokio::sync::Mutex;
 
 #[cxx::bridge]
 pub mod cxxbridge {
-
     struct FeedStatus {
         account: String,
         content: String,
@@ -15,14 +15,17 @@ pub mod cxxbridge {
 
     unsafe extern "C++" {
         include!("glue/glue.h");
+        include!("cxx-qt-lib/qstring.h");
+        type QString = cxx_qt_lib::QString;
         type EventBus;
 
-        fn event_bus_send_display_code_input(bus: Pin<&'static mut EventBus>);
+        fn event_bus_send_open_code_url(bus: Pin<&'static mut EventBus>, url: &QString);
     }
 
     extern "Rust" {
         type RustMastodon;
 
+        fn rust_mastodon_init();
         fn rust_mastodon_new() -> Box<RustMastodon>;
         fn rust_mastodon_prepare_login(
             rust_mastodon: &RustMastodon,
@@ -50,6 +53,10 @@ impl RustMastodon {
     }
 }
 
+fn rust_mastodon_init() {
+    Mastodon::init()
+}
+
 fn rust_mastodon_new() -> Box<RustMastodon> {
     Box::new(RustMastodon::new())
 }
@@ -64,7 +71,10 @@ fn rust_mastodon_prepare_login(
         let mut mastodon = mastodon.lock().await;
         let result = mastodon.prepare_login(server).await;
         match result {
-            Ok(()) => cxxbridge::event_bus_send_display_code_input(bus),
+            Ok(url) => {
+                let url = QString::from(&url);
+                cxxbridge::event_bus_send_open_code_url(bus, &url);
+            }
             Err(err) => {
                 error!("Could not prepare login. {:?}", err);
             }

@@ -6,7 +6,10 @@ Page {
     MastodonLogin {
         id: login
         mastodon: mastodonInstance
-        onDisplayCodeInput: pageStack.push(codePage)
+        onOpenCodeUrl: {
+            Qt.openUrlExternally(url)
+            pageStack.push(codePage)
+        }
     }
 
     SilicaFlickable {
