@@ -1,0 +1,27 @@
+[package]
+name = "elephant-seal-ffi"
+version = "0.1.0"
+edition = "2018"
+build = "build.rs"
+
+[dependencies]
+cxx = "1.0"
+cxx-qt-lib = { git = "https://github.com/SfietKonstantin/cxx-qt", branch = "sfos" }
+elephant-seal-rs = { path = "../elephant-seal-rs" }
+log = "0.4"
+tokio = { version = "1", features = ["rt-multi-thread"] }
+
+# Pinned dependencies for Rust 1.52.1
+bumpalo = "=3.8.0"
+hermit-abi = "=0.1.19"
+
+[build-dependencies]
+copy_dir = "0.1"
+cxx-build = "1.0"
+cxx-qt-lib-headers = { git = "https://github.com/SfietKonstantin/cxx-qt", branch = "sfos" }
+
+# Pinned dependencies for Rust 1.52.1
+proc-macro2 = "=1.0.43"
+
+[lib]
+crate-type=["staticlib"]

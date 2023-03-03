@@ -17,7 +17,8 @@ public:
     bool isLoggedIn() const;
 
     EventBus &eventBus() const;
-    void prepareLogin(const QString &server);
+    void preLogin(const QString &server);
+    void login(const QString &code);
 signals:
     void loggedInChanged();
 

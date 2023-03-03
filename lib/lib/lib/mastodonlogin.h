@@ -1,30 +1,39 @@
 #pragma once
 
-#include <QObject>
+#include "task.h"
 
 class Mastodon;
 class MastodonLogin : public QObject {
     Q_OBJECT
     Q_PROPERTY(Mastodon *mastodon READ mastodon WRITE setMastodon NOTIFY mastodonChanged)
-    Q_PROPERTY(QString server READ server WRITE setServer NOTIFY serverChanged)
+    Q_PROPERTY(Task *preLoginTask READ preLoginTask CONSTANT)
+    Q_PROPERTY(Task *loginTask READ loginTask CONSTANT)
 
 public:
+    enum Status {
+        Loading,
+        Success,
+        Error
+    };
+    Q_ENUM(Status)
+
     explicit MastodonLogin(QObject *parent = nullptr);
     Mastodon *mastodon() const;
     void setMastodon(Mastodon *mastodon);
-    const QString &server() const;
-    void setServer(const QString &server);
+    Task *preLoginTask() const;
+    Task *loginTask() const;
 
 public slots:
-    void prepareLogin();
+    void preLogin(const QString &server);
+    void login(const QString &code);
 
 signals:
     void mastodonChanged();
-    void serverChanged();
-
-    void openCodeUrl(const QString &url);
 
 private:
+    void handlePreLoginSuccess(const QString &url);
+
     Mastodon *m_mastodon{nullptr};
-    QString m_server;
+    Task *m_preLoginTask{nullptr};
+    Task *m_loginTask{nullptr};
 };

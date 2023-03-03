@@ -9,6 +9,7 @@
 int main(int argc, char *argv[]) {
     qmlRegisterType<Mastodon>("harbour.elephantseal", 1, 0, "Mastodon");
     qmlRegisterType<MastodonLogin>("harbour.elephantseal", 1, 0, "MastodonLogin");
+    qmlRegisterUncreatableType<Task>("harbour.elephantseal", 1, 0, "Task", "Cannot be created");
 
 #ifdef WITH_SAILFISH
     return SailfishApp::main(argc, argv);
