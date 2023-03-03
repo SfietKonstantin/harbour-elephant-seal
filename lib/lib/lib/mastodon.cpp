@@ -17,8 +17,12 @@ EventBus &Mastodon::eventBus() const {
     return *m_eventBus;
 }
 
-void Mastodon::prepareLogin(const QString &server) {
-    m_hook->prepareLogin(server, *m_eventBus);
+void Mastodon::preLogin(const QString &server) {
+    m_hook->preLogin(server, *m_eventBus);
+}
+
+void Mastodon::login(const QString &code) {
+    m_hook->login(code, *m_eventBus);
 }
 
 void Mastodon::setLoggedIn(bool loggedIn) {

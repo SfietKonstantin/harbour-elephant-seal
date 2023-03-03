@@ -1,0 +1,22 @@
+[package]
+name = "elephant-seal-rs"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+crabodon = { git = "https://github.com/SfietKonstantin/crabodon", branch = "rest" }
+env_logger = "0.9"
+log = "0.4"
+pretend = "0.4"
+pretend-reqwest = "0.4"
+thiserror = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "=0.8.25"
+url = { version = "2.2", features = ["serde"] }
+
+# Pinned dependencies for Rust 1.52.1
+indexmap = "=1.8.2"
+num_cpus = "=1.14.0"
+once_cell = "=1.14.0"
+reqwest = "=0.11.13"
+security-framework = "=2.6.1"

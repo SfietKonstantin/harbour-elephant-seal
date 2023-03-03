@@ -61,10 +61,14 @@ add_custom_target(otherfiles SOURCES
 
     qml/harbour-elephant-seal.qml
     qml/cover/CoverPage.qml
-    qml/pages/FirstPage.qml
-    qml/pages/SecondPage.qml
+    qml/components/DialogError.qml
+    qml/components/ErrorItem.qml
+    qml/components/PageError.qml
+    qml/pages/LoginDialog.qml
+    qml/pages/LoginCodeDialog.qml
+    qml/pages/LoginFinalizationPage.qml
     qml/pages/LoginPage.qml
-    qml/pages/LoginCodePage.qml
+    qml/pages/MainPage.qml
 
     ${TsFiles}
 )

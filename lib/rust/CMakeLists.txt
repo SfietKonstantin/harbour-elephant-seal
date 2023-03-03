@@ -7,12 +7,12 @@ find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 find_package(OpenSSL REQUIRED)
 pkg_search_module(SAILFISH sailfishapp)
 
-corrosion_import_crate(MANIFEST_PATH Cargo.toml CRATES elephant-seal-rs FLAGS -vv -j1)
+corrosion_import_crate(MANIFEST_PATH Cargo.toml CRATES elephant-seal-ffi FLAGS -vv -j1)
 
 if ("${SAILFISH_FOUND}")
     # We need to help Rust with OpenSSL and cross-compilation
     # And qmake detection is unsupported with old Qt
-    corrosion_set_env_vars(elephant-seal-rs
+    corrosion_set_env_vars(elephant-seal-ffi
         "CMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}"
         "QMAKE=qmake"
         "OPENSSL_DIR=/usr"
@@ -27,7 +27,7 @@ if ("${SAILFISH_FOUND}")
     )
 else()
     get_target_property(QMAKE Qt::qmake IMPORTED_LOCATION)
-    corrosion_set_env_vars(elephant-seal-rs
+    corrosion_set_env_vars(elephant-seal-ffi
         "CMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}"
         "QMAKE=${QMAKE}"
     )
@@ -43,4 +43,4 @@ add_library(${PROJECT_NAME} STATIC
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_link_libraries(${PROJECT_NAME} elephant-seal-lib elephant-seal-rs Qt5::Gui ${OPENSSL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} elephant-seal-lib elephant-seal-ffi Qt5::Core Qt5::Gui ${OPENSSL_LIBRARIES})

@@ -1,13 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.elephantseal 1.0
 
-Page {
-    id: loginPage
-    MastodonLogin {
-        id: mastodonLogin
-        mastodon: root
-    }
+Dialog {
+    canAccept: serverField.text.length > 0
+    onAccepted: mastodonLogin.preLogin(serverField.text)
+    acceptDestination: loginCodeDialog
 
     SilicaFlickable {
         anchors.fill: parent
@@ -20,8 +17,8 @@ Page {
             anchors.right: parent.right
             spacing: Theme.paddingLarge
 
-            PageHeader {
-                title: qsTr("Elephant seal")
+            DialogHeader {
+                acceptText: qsTr("Open browser")
             }
 
             Label {
@@ -29,22 +26,23 @@ Page {
                 anchors.leftMargin: Theme.horizontalPageMargin
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.horizontalPageMargin
-                text: qsTr("Log into a Mastodon instance")
+                text: qsTr("Enter your Mastodon instance, then accept this dialog to open the Mastodon login page.")
                 wrapMode: Text.WordWrap
                 color: Theme.highlightColor
             }
 
-            Button {
-                id: loginButton
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Login")
-                onClicked: pageStack.push(loginDialog)
+            TextField {
+                id: serverField
+                anchors.left: parent.left
+                anchors.right: parent.right
+                label: qsTr("Mastodon instance URL")
+                focus: true
             }
         }
     }
 
     Component {
-        id: loginDialog
-        LoginDialog {}
+        id: loginCodeDialog
+        LoginCodeDialog {}
     }
 }
