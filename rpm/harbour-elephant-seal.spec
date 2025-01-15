@@ -78,8 +78,12 @@ export AR_aarch64_unknown_linux_gnu=aarch64-meego-linux-gnu-ar
 
 export CARGO_BUILD_TARGET=%SB2_TARGET
 
+export RUSTC_LOG=rustc_codegen_ssa::back::link=info
+
+
 #%cmake -DCMAKE_BUILD_TYPE=Release -DRust_CARGO_TARGET=%SB2_TARGET .
 %cmake -DRust_CARGO_TARGET=%SB2_TARGET .
+printenv
 make %{?_smp_mflags}
 # << build pre
 

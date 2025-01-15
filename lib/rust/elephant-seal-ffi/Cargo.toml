@@ -20,8 +20,5 @@ copy_dir = "0.1"
 cxx-build = "1.0"
 cxx-qt-lib-headers = { git = "https://github.com/SfietKonstantin/cxx-qt", branch = "sfos" }
 
-# Pinned dependencies for Rust 1.52.1
-proc-macro2 = "=1.0.43"
-
 [lib]
 crate-type=["staticlib"]
