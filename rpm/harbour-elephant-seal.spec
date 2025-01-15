@@ -80,6 +80,7 @@ export CARGO_BUILD_TARGET=%SB2_TARGET
 
 #%cmake -DCMAKE_BUILD_TYPE=Release -DRust_CARGO_TARGET=%SB2_TARGET .
 %cmake -DRust_CARGO_TARGET=%SB2_TARGET .
+printenv
 make %{?_smp_mflags}
 # << build pre
 
